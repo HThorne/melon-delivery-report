@@ -1,40 +1,41 @@
-print("Day 1")
-the_file = open("um-deliveries-day-1.txt")
-for line in the_file:
-    line = line.rstrip()
-    words = line.split('|')
+def print_summary(day_num, file_name):
+    """From day and text file, prints a summary of deliveries
+    
+    Opens file, splits line, assigns variable to each substring, inserts
+    into a print statement"""
 
-    melon = words[0]
-    count = words[0]
-    amount = words[0]
+    print("Day:", day_num)
+    
+    # open file and set to variable
+    deliveries = open(file_name)
 
-    print(f"Delivered {count} {melon}s for total of ${amount}")
-the_file.close()
+    # empty variable for days earnings
+    total_earnings = 0
 
+    # iterate over each line from file
+    for delivery in deliveries:
+        delivery = delivery.rstrip()  # strip trailing whitespace
+        delivery_info = delivery.split("|")  # create list of substrings
 
-print("Day 2")
-the_file = open("um-deliveries-day-2.txt")
-for line in the_file:
-    line = line.rstrip()
-    words = line.split('|')
+        # assign each item to  variable
+        melon = delivery_info[0]
+        melon_count = delivery_info[1]
+        price = delivery_info[2]
 
-    melon = words[0]
-    count = words[0]
-    amount = words[0]
+        # from solution: also melon, melon_count, price = delivery_info
 
-    print(f"Delivered {count} {melon}s for total of ${amount}")
-the_file.close()
+        # turn price str to float and add to total
+        total_earnings += float(price)
 
+        # display info for each delivery
+        print(f"Delivered {melon_count} {melon}s for total of ${price}")
 
-print("Day 3")
-the_file = open("um-deliveries-day-3.txt")
-for line in the_file:
-    line = line.rstrip()
-    words = line.split('|')
+    # display total of prices from day
+    print(f"Day {day_num} earnings = ${total_earnings}")
+    print()
+    deliveries.close() 
 
-    melon = words[0]
-    count = words[0]
-    amount = words[0]
-
-    print(f"Delivered {count} {melon}s for total of ${amount}")
-the_file.close()
+# call function for each report
+print_summary(1, "um-deliveries-day-1.txt")
+print_summary(2, "um-deliveries-day-2.txt")
+print_summary(3, "um-deliveries-day-3.txt")
